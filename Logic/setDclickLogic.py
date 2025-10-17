@@ -17,3 +17,4 @@ class setDclickLogic(QDialog,setDclick.Ui_Dialog):
             QMessageBox.warning(self, "输入错误", "请输入数字")
             return
         self.send_dclick_signal.emit(int(self.dClickXTextEdit.toPlainText()),int(self.dClickYTextEdit.toPlainText()))
+        super().accept()

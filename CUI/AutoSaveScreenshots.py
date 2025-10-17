@@ -1,6 +1,5 @@
 import uiautomator2 as u2
 import time
-import tqdm
 # 连接设备，引号中的内容可通过adb devices列出后查看序列号
 d = u2.connect("172.28.108.96:39771")
 # 记录一共截屏多少张

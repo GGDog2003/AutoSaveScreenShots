@@ -32,6 +32,8 @@ print("正在执行代码.........")
         self.start_screenshots.clicked.connect(self.handle_execute_code)
         self.dTextBtn.clicked.connect(self.handle_dText)
         self.dClickBtn.clicked.connect(self.handle_dclick)
+        self.dSwipeBtn.clicked.connect(self.handle_dswipe)
+
     def closeEvent(self, a0, QCloseEvent=None):
         """窗口关闭事件处理"""
         # 隐藏当前窗口，显示连接界面
@@ -125,6 +127,15 @@ print("正在执行代码.........")
         self.addScrLogicListView(f"点击坐标：({dclickX},{dclickY})")
         self.addRawCode(f"d.click({dclickX},{dclickY})")
         return
+    def handle_dswipe(self):
+        from  Logic.setDswipeLogic import setDclickLogic
+        self.setDswipe_window=setDclickLogic()
+        self.setDswipe_window.send_dswipe_signal.connect(self.on_receive_dswipe)
+        self.setDswipe_window.show()
+    def on_receive_dswipe(self,dswipeX1,dswipeY1,dswipeX2,dswipeY2):
+        """处理从setDswipe_window接收的dswipe数据"""
+        self.addScrLogicListView(f"滑动坐标：({dswipeX1},{dswipeY1})->({dswipeX2},{dswipeY2})")
+        self.addRawCode(f"d.swipe({dswipeX1},{dswipeY1},{dswipeX2},{dswipeY2})")
 if __name__ == "__main__":
     import sys
     # 创建独立的应用实例
